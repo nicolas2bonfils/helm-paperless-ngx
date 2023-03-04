@@ -14,6 +14,17 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+persistence:
+  enabled: true
+  name: paperless
+  existingClaim: ""
+  accessMode: ReadWriteOnce
+  size: 2Gi
+  storageClass: ""
+  path: /opt/paperless/
+  annotations: {}
+  # subPath: "" # only mount a subpath of the Volume into the pod
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true

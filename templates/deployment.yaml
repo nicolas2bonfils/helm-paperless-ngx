@@ -33,6 +33,13 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: PAPERLESS_CONSUMPTION_DIR
+              value: "{{ .Values.persistence.path }}/consume"
+            - name: PAPERLESS_DATA_DIR
+              value: "{{ .Values.persistence.path }}/data"
+            - name: PAPERLESS_MEDIA_ROOT
+              value: "{{ .Values.persistence.path }}/media"
           ports:
             - name: http
               containerPort: 8000
@@ -47,6 +54,20 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          volumeMounts:
+            - name: {{ .Values.persistence.name }}
+              mountPath: {{ .Values.persistence.path }}
+              {{- if .Values.persistence.subPath }}
+              subPath: {{ .Values.persistence.subPath }}
+              {{- end }}
+      volumes:
+        - name: {{ .Values.persistence.name }}
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ default (include "paperless-ngx.fullname" .) .Values.persistence.existingClaim }}
+          {{- else }}
+          emptyDir: {}
+          {{- end }}
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
