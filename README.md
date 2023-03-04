@@ -13,5 +13,5 @@ Currently that helm-chart is not (yet) deployed to a helm-registry. So you have 
 ```
 $ git checkout https://github.com/nicolas2bonfils/helm-paperless-ngx.git
 $ cd helm-paperless-ngx
-$ helm install -n paperless-ngx paperless-ngx . -f values.yml
+$ helm install -n paperless-ngx paperless-ngx . -f values.yaml
 ```
