@@ -14,6 +14,14 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+rootUrl: https://paperless.example.com
+# Adjust this key if you plan to make paperless available publicly. It should
+# be a very long sequence of random characters. You don't need to remember it.
+# ex : `date | sha256sum | awk '{print $1}'`
+secretKey: change-me
+tz: Europe/Paris
+ocrLang: fr
+
 persistence:
   enabled: true
   name: paperless
