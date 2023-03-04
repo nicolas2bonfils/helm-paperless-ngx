@@ -1,6 +1,6 @@
 # Paperless-ngx
 
-An Helm chart to deploy [Paperless-ngx](https://www.paperless-ngx.com)
+An Helm chart to deploy [Paperless-ngx](https://github.com/paperless-ngx/paperless-ngx)
 
 ## Goal
 
